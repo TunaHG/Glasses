@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 1. Data Source 생성 -->
+	<!-- DriverManageDataSource dataSource = new DriverManagerDataSource(); -->
+	<!-- dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver"); -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="glasses"/>
+		<property name="password" value="glass"/>
+	</bean>
+	<!-- 2. Mapper, Mybatis 설정파일 정보 알려주기 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:/com/multi/glasses/mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath:/com/multi/glasses/board-mapping.xml"/>
+	</bean>
+
+	<!-- 3. SqlSessionTemplate (Spring api) 생성 = mybatis SqlSession -->
+	<!-- SqlSessionTemplate sqlSession = new SqlSessionTemplate(SqlSessionFactoryBean타입 객체); -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+</beans>
