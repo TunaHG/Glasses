@@ -22,9 +22,14 @@ public class MemberDAO {
 		return session.selectOne("existid", member);
 	}
 	
+	// register - id check
+	public int isHouseExist(MemberVO member) {
+		return session.selectOne("existhouse", member);
+	}
+	
 	// register - insert new member
-	public void insertMember(MemberVO member) {
-		session.selectOne("insertmember", member);
+	public int insertMember(MemberVO member) {
+		return session.update("insertmember", member);
 	}
 	
 	// member테이블에서 회원 체크하기(select count(*))
@@ -34,7 +39,7 @@ public class MemberDAO {
 	
 	// 회원정보 가져오기(select *)
 	public MemberVO getAccountInfo(MemberVO vo) {
-		return session.selectOne("getaccountinfo", vo);
+		return session.selectOne("getaccountinfo2", vo);
 	}
 
 //		public int idCheck(MemberVO member_id) {

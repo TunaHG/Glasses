@@ -157,9 +157,21 @@
 						} 
 					}); */
 					
+					/*
+					if(dao.isIdExist(member) == 0) {
+						if(dao.isHouseExist(member) == 0) {
+							return "success";
+						}
+						else
+							return "house";
+					} else {
+						return "id";
+					}
+					*/
+					
 					$.ajax({
 						type: 'POST',
-						url: '/glasses/idcheck',
+						url: '/glasses/membercheck',
 						//data: { 'member_id' : $("#inputId").val() },
 						data: form_data,
 						success: function (data) {
@@ -168,8 +180,12 @@
 								// href : homeinfo.jsp	/homeinfo
 								// alert("success");
 								alert("회원가입이 완료되었습니다.");
-								window.location.href='/glasses/';
-							} else {
+								window.location.href='<%=request.getContextPath()%>/';
+							} else if(data == "house") {
+								$("#inputHouseID").focus();
+								alert("해당 세대는 더이상 회원가입이 불가능합니다.");
+								window.location.href='<%=request.getContextPath()%>/';								
+							} else if(data == "id"){
 								// already exist id
 								$("#inputId").focus();
 								$("#inputIdHint").html("<span style='color:red;font-weight:bold'>이미 존재하는 아이디입니다.</span>");

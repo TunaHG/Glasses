@@ -84,16 +84,23 @@ public class MemberController {
 		return "register";
 	}
 	
-//	@RequestMapping("/idcheck")		// using in register - Ajax
-	@RequestMapping(value="/idcheck", method=RequestMethod.POST)
+//	@RequestMapping("/membercheck")		// using in register - Ajax
+	@RequestMapping(value="/membercheck", method=RequestMethod.POST)
 	@ResponseBody
 	public String registerIdCheck(HttpServletRequest request, MemberVO member) {
-		//System.out.println(member);
+		System.out.println("before " +member);
 		
 		if(dao.isIdExist(member) == 0) {
-			return "success";
+			if(dao.isHouseExist(member) == 0) {	
+				if(dao.insertMember(member) == 1) {
+					System.out.println("after "+ dao.getAccountInfo(member));
+					return "success";
+				} else { return "error"; }
+			} else {
+				return "house";
+			}
 		} else {
-			return "fail";
+			return "id";
 		}
 
 	}
