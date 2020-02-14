@@ -17,7 +17,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html">Spring Project</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-                <!-- 사람표시를 맨 오른쪽으로 보내기 위함 -->
+                <!-- 사람표시를 맨 오른쪽으로 보내기 위함 -->		
                 <div class="input-group">
                     
                 </div>

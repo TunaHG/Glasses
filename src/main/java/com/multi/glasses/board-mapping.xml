@@ -10,4 +10,3 @@
 		select * from board where form='notice'
 	</select>
 </mapper>
-
