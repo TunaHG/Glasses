@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+div.temp-card-left {
+    width: 80%;
+    height: 100%;
+}
+
+div.temp-card-right {
+    width: 20%;
+    height: 100%;
+}
+
+div.temp-card-up {
+    width: 100%;
+    height: 50%;
+}
+
+div.temp-card-down {
+    width: 100%;
+    height: 50%;
+}
