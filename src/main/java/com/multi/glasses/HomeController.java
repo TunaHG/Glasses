@@ -44,7 +44,7 @@ public class HomeController {
 //		System.out.println();
 		
 		
-		return "login";
+		return "btntest";
 	}
 	
 }
