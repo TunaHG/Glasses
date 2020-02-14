@@ -10,6 +10,23 @@
 			and password = #{password}
 </select>
 
+<select id="existid" resultType="int" parameterType="member">
+	select count(*) from member where member_id=#{member_id}
+</select>
+
+<insert id="insertmember">
+	insert into member(member_id, password, name, phone, allowed, house_id) 
+	values(#{member_id}, #{password}, #{name}, #{phone}, 'false', #{house_id})
+</insert>
+<!--
+member_id, password, name, phone, allowed, date, house_id
+
+<insert id="newmember" parameterType="member"> 
+	insert into member(userid, password, name, phone) 
+	values(#{userid}, #{password}, #{name}, #{phone})
+</insert>
+-->
+
 </mapper>
 
 
