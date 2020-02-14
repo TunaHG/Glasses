@@ -9,9 +9,16 @@
 </select>
 
 <select id="getaccountinfo" resultType="member" parameterType="member">
-	select * from member
-	where member_id = #{member_id} and password = #{password}
+	select * from member where member_id=#{member_id} and password=#{password} and allowed='TRUE'
+	
 </select>
+
+<select id="getaccountinfo2" resultType="member" parameterType="member">
+	select * from member where member_id=#{member_id} and password=#{password}  
+</select>
+<!--
+member_id, password, name, phone, allowed, house_id
+-->
 </mapper>
 
 

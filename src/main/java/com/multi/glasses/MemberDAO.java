@@ -10,12 +10,12 @@ public class MemberDAO {
 	@Autowired
 	SqlSession session;
 	
-	// member테이블에서 회원 체크하기
+	// member테이블에서 회원 체크하기(select count(*))
 	public int memberCheck(MemberVO vo) {
 		return session.selectOne("membercheck", vo);
 	}
 	
-	// 회원정보 가져오기
+	// 회원정보 가져오기(select *)
 	public MemberVO getAccountInfo(MemberVO vo) {
 		return session.selectOne("getaccountinfo", vo);
 	}
