@@ -12,9 +12,13 @@
 	select count(*) from member where member_id=#{member_id}
 </select>
 
+<select id="existhouse" resultType="int" parameterType="member">
+	select count(*) from member where house_id=#{house_id}
+</select>
+
 <insert id="insertmember">
-	insert into member(member_id, password, name, phone, allowed, house_id) 
-	values(#{member_id}, #{password}, #{name}, #{phone}, 'false', #{house_id})
+	insert into member(member_id, password, name, phone, allowed, house_id, selecttemp) 
+	values(#{member_id}, #{password}, #{name}, #{phone}, 'USER', #{house_id}, '22')
 </insert>
 <!--
 member_id, password, name, phone, allowed, date, house_id
@@ -27,7 +31,6 @@ member_id, password, name, phone, allowed, date, house_id
 
 <select id="getaccountinfo" resultType="member" parameterType="member">
 	select * from member where member_id=#{member_id} and password=#{password} and allowed='TRUE'
-	
 </select>
 
 <select id="getaccountinfo2" resultType="member" parameterType="member">
