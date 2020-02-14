@@ -36,9 +36,9 @@ public class MemberController {
 	}
 	
 	//로그인 실패
-	@RequestMapping("/glasses/login")
+	@RequestMapping("/glasses/loginfail")
 	public String loginError() {
-		return "/glasses/login";
+		return "/glasses/loginfail";
 	}
 	
 	@RequestMapping("/index")
