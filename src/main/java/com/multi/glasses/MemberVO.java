@@ -1,7 +1,7 @@
 package com.multi.glasses;
 
 public class MemberVO {
-	String member_id, password, name, phone, allowed, date, house_id;
+	String member_id, password, name, phone, allowed, /* date, */ house_id;
 
 	public String getMember_id() {
 		return member_id;
@@ -43,13 +43,13 @@ public class MemberVO {
 		this.allowed = allowed;
 	}
 
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
+//	public String getDate() {
+//		return date;
+//	}
+//
+//	public void setDate(String date) {
+//		this.date = date;
+//	}
 
 	public String getHouse_id() {
 		return house_id;
@@ -62,7 +62,7 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [member_id=" + member_id + ", password=" + password + ", name=" + name + ", phone=" + phone
-				+ ", allowed=" + allowed + ", date=" + date + ", house_id=" + house_id + "]";
+				+ ", allowed=" + allowed + /* ", date=" + date + */ ", house_id=" + house_id + "]";
 	}
 
 }
