@@ -184,10 +184,12 @@
 										</tbody>
                                     </table>
 										<%
-											int totalPage = (int) request.getAttribute("totalPage"); /* == ${totalPage } 같은의미 */
+											// int totalPage = (int) request.getAttribute("totalPage"); /* == ${totalPage } 같은의미 */
+											/*
 											for (int i = 1; i <= totalPage; i++) {
 												out.println("<a href='/mvc/membertable?pagenum=" + i + "'>" + i + "</a>&nbsp;");
 											}
+											*/
 										%>
                                 </div>
                             </div>
