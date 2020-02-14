@@ -44,6 +44,11 @@
                     </div>
                 </main>
             </div>
+            <!--
+            
+            member_id, password, name, phone, allowed, date, house_id;
+            
+            -->
             <div id="layoutAuthentication_footer">
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
