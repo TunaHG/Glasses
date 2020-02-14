@@ -3,13 +3,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-<select id="login" resultType="member" parameterType="member">
-	select member_id, password
-	from member
-	where member_id = #{member_id} 
-			and password = #{password}
+<select id="membercheck" resultType="int" parameterType="member">
+	select count(*) from member
+	where member_id = #{member_id} and password = #{password}
 </select>
 
+<select id="getaccountinfo" resultType="member" parameterType="member">
+	select * from member where member_id=#{member_id} and password=#{password} and allowed='TRUE'
+	
+</select>
+
+<select id="getaccountinfo2" resultType="member" parameterType="member">
+	select * from member where member_id=#{member_id} and password=#{password}  
+</select>
+<!--
+member_id, password, name, phone, allowed, house_id
+-->
 </mapper>
 
 

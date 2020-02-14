@@ -6,5 +6,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.multi.glasses.BoardVO" alias="board"/>
+		<typeAlias type="com.multi.glasses.MemberVO" alias="member"/>
 	</typeAliases>
 </configuration>
