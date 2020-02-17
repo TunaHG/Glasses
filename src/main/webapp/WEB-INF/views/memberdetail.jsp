@@ -42,7 +42,36 @@
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
-                        <div class="nav">
+                    <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/">
+                            	<div class="sb-nav-link-icon">
+                            		<i class="fas fa-tachometer-alt"></i>
+                            	</div>
+                                	메인화면
+                            </a>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                	게시판
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                	<a class="nav-link" href="<%=request.getContextPath()%>/noticeboardlist">공지사항</a>
+                                	<a class="nav-link" href="<%=request.getContextPath()%>/freeboardlist">자유게시판</a>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a 
+                            	class="nav-link" href="<%=request.getContextPath()%>/membertable?pagenum=1">
+                            	<div class="sb-nav-link-icon">
+                            		<i class="fas fa-tachometer-alt"></i>
+                            	</div>
+                                	회원 관리
+                            </a>
+                        </div>
+                       <!--  <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="index.html"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -88,7 +117,7 @@
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Tables</a
                             >
-                        </div>
+                        </div> -->
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
@@ -107,21 +136,21 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 										<thead>
-											<form action="http://localhost:8081/mvc/updatemember">
+											<form action="http://localhost:8081/glasses/updatemember">
 											
 												<tr><th>member_id:</th><th><input type="text" name="member_id"value=${detail.member_id } readonly></th></tr>
 												<tr><th>password:</th><th><input type="text" name="password"value=${detail.password }></th></tr>
 												<tr><th>name:</th><th><input type="text" name="name" value=${detail.name }></th></tr>
 												<tr><th>phone:</th><th><input type="text" name="phone" value=${detail.phone }></th></tr>
 												<tr><th>allowed:</th><th><select name="allowed">
-																			<option value="false">false</option>
-																			<option value="user">user</option>
-																			<option value="admin">admin</option>
+																			<option value="FALSE">FALSE</option>
+																			<option value="USER">USER</option>
+																			<option value="ADMIN">ADMIN</option>
 																		</select></th></tr>
 												<tr><th>house_id:</th><th><input type="text" name="house_id"value=${detail.house_id } readonly></th></tr>
 												 <input type="submit" value="수정">
 											</form>
-											<form action="http://localhost:8081/mvc/deletemember">
+											<form action="http://localhost:8081/glasses/deletemember">
 												<input type="hidden" name="house_id"value="${detail.house_id }"> 
 												<input type="submit"value="삭제">
 											</form>

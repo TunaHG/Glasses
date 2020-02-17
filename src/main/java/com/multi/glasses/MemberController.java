@@ -1,9 +1,11 @@
 package com.multi.glasses;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
+//import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 public class MemberController {
@@ -190,5 +193,67 @@ public class MemberController {
 //		}
 //	
 //	}
-
+	
+	/////////////////////////////khh.//////////////////////////////
+	
+	//page에 회원 리스트 출력 
+	@RequestMapping("/membertable")
+	public ModelAndView getCntEmp(int pagenum) {
+		int count = dao.getCountMember();
+		int cntPerPage = 5;
+		int totalPage = 0;
+		
+		if(count%cntPerPage == 0) {
+			totalPage = count/cntPerPage;	
+		}else {
+			totalPage = count/cntPerPage + 1;
+		}
+		ModelAndView mv = new ModelAndView();
+		int start = (pagenum-1)*cntPerPage+1;
+		int end = pagenum*cntPerPage;
+		int param [] = new int[2];
+		
+		param[0] = start;
+		param[1] = end;
+		List<MemberVO> memberlist = dao.memberList(param);
+		List<MemberVO> approvalList = dao.approvalList(); 
+		mv.addObject("approvalList", approvalList );
+		mv.addObject("memberlist", memberlist);
+		mv.addObject("totalPage", totalPage);
+		return mv;
+	}
+	
+	@RequestMapping("/memberdetail")
+	public ModelAndView detail(String member_id) {
+		//System.out.println("11111houseID = "+vo.getHouse_id());
+		MemberVO vo = dao.getdetail(member_id);
+		ModelAndView mv = new ModelAndView();
+		//System.out.println("444444houseID = "+vo.getHouse_id());
+		mv.addObject("detail", vo);
+		return mv;
+	}
+	
+	@RequestMapping("/updatemember")
+	public String updateMember(@ModelAttribute MemberVO vo) {
+		System.out.println(vo);
+		dao.updateMember(vo);
+		System.out.println(vo.allowed+"2222222222222");
+		return "redirect:/membertable?pagenum="+1;
+	}
+	
+	@RequestMapping("/updateallowed")
+	public String updateAllowed(String allowed, String house_id) {
+		System.out.println("승인 key"+allowed);
+		System.out.println("houseID =" +house_id);
+		dao.updateAllowed(allowed, house_id);
+		return "redirect:/membertable?pagenum="+1;
+	}
+	
+	@RequestMapping("/deletemember")
+	public String deleteMember(String house_id) {
+		dao.deleteMember(house_id);
+		System.out.println(house_id+"2222222222222");
+		return "redirect:/membertable?pagenum="+1;
+	}
+//////////////////////////////////////////////////////////////////////////khh///
 }

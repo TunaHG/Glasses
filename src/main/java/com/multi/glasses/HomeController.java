@@ -45,6 +45,7 @@ public class HomeController {
 		
 		return "freeboardlist";
 
+
 	}
 	
 }

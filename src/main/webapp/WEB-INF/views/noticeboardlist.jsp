@@ -56,6 +56,14 @@
                                 	<a class="nav-link" href="<%=request.getContextPath()%>/freeboardlist">자유게시판</a>
                                 </nav>
                             </div>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a 
+                            	class="nav-link" href="<%=request.getContextPath()%>/membertable?pagenum=1">
+                            	<div class="sb-nav-link-icon">
+                            		<i class="fas fa-tachometer-alt"></i>
+                            	</div>
+                                	회원 관리
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

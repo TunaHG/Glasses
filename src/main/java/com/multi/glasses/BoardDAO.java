@@ -20,4 +20,8 @@ public class BoardDAO {
 		List<BoardVO> list = session.selectList("noticeboardlist");
 		return list;
 	}
+	
+	public void createBoard(BoardVO vo) {
+		session.selectOne("insertmember", vo);
+	}
 }
