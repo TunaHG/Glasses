@@ -1,0 +1,28 @@
+@charset "EUC-KR";
+
+@charset "UTF-8";
+
+div .temp-card-left {
+	float: left;
+    width: 79%;
+    height: 100%;
+    text-align: center;
+}
+
+div .temp-card-right {
+	float: left;
+    width: 19%;
+    height: 100%;
+}
+
+div .temp-card-up {
+    width: 100%;
+    height: 48.8%;
+    text-align: center;
+}
+
+div .temp-card-down {
+    width: 100%;
+    height: 48,8%;
+    text-align: center;
+}
