@@ -11,6 +11,10 @@
 	<select id="existid" resultType="int" parameterType="member">
 		select count(*) from member where member_id=#{member_id}
 	</select>
+
+  <select id="existhouse" resultType="int" parameterType="member">
+	  select count(*) from member where house_id=#{house_id}
+  </select>
 	
 	<insert id="insertmember">
 		insert into member(member_id, password, name, phone, allowed, house_id) 
@@ -71,15 +75,5 @@
 	
 	<!-- ///////////////////////////khh///////////////////////////////// -->
 </mapper>
-
-
-
-
-
-
-
-
-
-
 
 
