@@ -12,6 +12,7 @@
         <meta name="author" content="" />
         <title>Dashboard - SB Admin</title>
         <link href="resources/dist/css/styles.css" type="text/css" rel="stylesheet" />
+        <link href="resources/css/jzee.css" type="text/css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -127,11 +128,29 @@
                         <div class="row">
                         	<div class="col-xl-3 col-md-6">
                         		<div class="card bg-primary text-white mb-4">
-                        			<div class="card-body">26</div>
-                        			<div class="card-body ">a</div>
+                        			<div class="card-body temp-card-left">26</div>
+                        			<div class="temp-card-right">a</div>
                         		</div>
                         	</div>
                         </div>
+                        
+                        <div class="row">
+                        	<div class="col-xl-3 col-md-6">
+                        		<div class="card bg-primary text-white mb-4">
+                        			<div class="card-body left-side"><div class="item">a</div></div>
+                        			<div class="right-side">
+                        				<div class="right-top">
+									        <div class="item">2</div>
+									    </div>
+									    <div class="right-bottom">
+									        <div class="item">3</div>
+									    </div>
+                        			</div>
+                        		</div>
+                        	</div>
+                        </div>
+                        
+                        
                         <!-- my -->
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
