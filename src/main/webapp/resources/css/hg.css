@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+table.detailboard{
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+td.detailboard{
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+td.formbox{
+	width: 100px;
+}
+
+table.createboard td.createboard{
+	border-collapse: collapse;
+	border: 1px solid black;
+}

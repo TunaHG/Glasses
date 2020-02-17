@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.multi.glasses.MemberVO" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,12 +10,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>자유게시판</title>
+        <title>공지사항</title>
         <link href="resources/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
+    <% MemberVO vo = (MemberVO)session.getAttribute("member"); %>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html">Spring Project</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
                 <!-- 사람표시를 맨 오른쪽으로 보내기 위함 -->
@@ -68,7 +70,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        
+                        <%=vo.getMember_id() %>
                     </div>
                 </nav>
             </div>
@@ -110,7 +112,7 @@
                                         	<c:forEach items="${list}" var="vo">
                                         		<tr>
                                         			<td>${vo.board_no}</td>
-                                        			<td>${vo.title}</td>
+                                        			<td><a href="<%=request.getContextPath()%>/detailboard?board_no=${vo.board_no}">${vo.title}</a></td>
                                         			<td>${vo.member_id}</td>
                                         			<td>${vo.viewcnt}</td>
                                         			<td>${vo.reg_date}</td>
@@ -118,6 +120,14 @@
                                         	</c:forEach>
                                         </tbody>
                                     </table>
+                                    <%
+                                    	if(vo.getHouse_id().equals("admin")){
+                                    %>
+                                    <form action="<%=request.getContextPath()%>/boardinsert">
+                                    	<input type=hidden value="notice" name="form">
+                                    	<input type=submit value="글쓰기">
+                                    </form>
+                                    <%} %>
                                 </div>
                             </div>
                         </div>
