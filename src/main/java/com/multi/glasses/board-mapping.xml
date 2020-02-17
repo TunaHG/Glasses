@@ -9,4 +9,8 @@
 	<select id="noticeboardlist" resultType="board">
 		select * from board where form='notice'
 	</select>
+	<insert id="insertmember" parameterType="member">
+		insert into board values(#{board_no}, #{title}, #{contents}, #{member_id}, #{form}, 0, sysdate)
+	</insert>
+	
 </mapper>

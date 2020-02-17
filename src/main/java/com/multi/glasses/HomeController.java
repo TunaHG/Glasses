@@ -32,12 +32,7 @@ public class HomeController {
 //		String formattedDate = dateFormat.format(date);
 //		
 //		model.addAttribute("serverTime", formattedDate );
-		
-<<<<<<< HEAD
 		return "freeboardlist";
-=======
-		return "login";
->>>>>>> 84f549d6675adcc9342a128865f187f162b254db
 	}
 	
 }
