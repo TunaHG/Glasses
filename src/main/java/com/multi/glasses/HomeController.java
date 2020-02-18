@@ -33,18 +33,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-//		double dValue = Math.random();
-//		double[] templist = new double[20];
-//		for (int i = 0; i < templist.length; i++) {
-//			templist[i] = (Math.random()*11) +16; 
-//		}
-//		for (int i = 0; i < templist.length; i++) {
-//			System.out.println(templist[i]); 
-//		}
-//		System.out.println();
-		
-		
-		return "btntest";
+		return "login";
 	}
 	
 }

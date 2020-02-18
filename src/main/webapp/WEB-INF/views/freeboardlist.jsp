@@ -53,13 +53,13 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                 	<a class="nav-link" href="<%=request.getContextPath()%>/noticeboardlist">공지사항</a>
-                                	<a class="nav-link" href="<%=request.getContextPath()%>/freeboardlist">자유게시판</a>
+                                	<a class="nav-link" href="<%=request.getContextPath()%>/freeboardlist">자유게시판 </a>
                                 </nav>
                             </div>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
+                        <div class="small">Logged in as:${member.house_id }</div>
                         
                     </div>
                 </nav>

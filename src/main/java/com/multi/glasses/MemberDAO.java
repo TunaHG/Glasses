@@ -1,5 +1,7 @@
 package com.multi.glasses;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,10 +13,10 @@ public class MemberDAO {
 	SqlSession session;
 
 	//계정정보 확인
-	public int selectByMember(MemberVO member_id, MemberVO password) {
-		
-		return session.selectOne("loginsuccess", member_id);
-	}
+//	public int selectByMember(MemberVO member_id, MemberVO password) {
+//		
+//		return session.selectOne("loginsuccess", member_id);
+//	}
 	
 	// Jzee
 	// register - id check
@@ -39,9 +41,16 @@ public class MemberDAO {
 	
 	// 회원정보 가져오기(select *)
 	public MemberVO getAccountInfo(MemberVO vo) {
+		// memberVO.allowed check : getaccountinfo
+		// memberVO.allowed not check : getaccountinfo2
 		return session.selectOne("getaccountinfo2", vo);
 	}
-
+	
+	// 희망온도 적용하기 
+	public int getSelectTemp(HttpServletRequest requesttemp) { 
+		return session.update("getSelectTemp", requesttemp);
+	}
+	
 //		public int idCheck(MemberVO member_id) {
 //			return session.selectOne("idcheck", member_id);
 //		}

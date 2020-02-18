@@ -37,6 +37,10 @@ member_id, password, name, phone, allowed, date, house_id
 	select * from member where member_id=#{member_id} and password=#{password}  
 </select>
 
+<update id="getSelectTemp" parameterType="member">
+	update member set selecttemp = #{selecttemp} where house_id = #{house_id}
+</update>
+
 </mapper>
 
 
