@@ -41,6 +41,10 @@ member_id, password, name, phone, allowed, date, house_id
 	update member set selecttemp = #{selecttemp} where house_id = #{house_id}
 </update>
 
+<update id="updatetemp" parameterType="member">
+	update member set selecttemp= #{selecttemp} where house_id=#{house_id}
+</update>
+
 </mapper>
 
 

@@ -81,7 +81,6 @@ public class WeatherDAO {
 		String url_time = "&base_time=" + vo.getBaseTime();
 		String subUrl = "&nx=61&ny=125&numOfRows=164&pageNo=1&dataType=json";
 		
-		
 		try {
 			
 			URL url = new URL(preUrl + key + url_date + url_time + subUrl);
@@ -104,9 +103,9 @@ public class WeatherDAO {
 			
 			br.close();
 			
-			vo.setTemp((String)data.get(3).get("obsrValue"));
 //			mv.addObject("t1h", data.get(3).get("obsrValue"));
 //			mv.setViewName("weathertest");
+			vo.setTemp((String)data.get(3).get("obsrValue"));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

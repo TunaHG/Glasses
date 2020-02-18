@@ -13,7 +13,7 @@ create table member(
     PHONE varchar2(30), 
     ALLOWED varchar2(30), 
     HOUSE_ID varchar2(30),
-    SELECTTEMP NUMBER(2)
+    SELECTTEMP varchar2(10)
 );
 
 insert into member values('asdf0185', 'asdf0185', '김하균', '010-9611-7555', 'TRUE', 'admin', '22');

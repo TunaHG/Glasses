@@ -67,7 +67,6 @@ public class MemberController {
 				mv.setViewName("redirect:freeboardlist"); // 관리자 페이지
 			} else {
 				session.setAttribute("hstatus", hdao.getStatus(result));
-				System.out.println(wdao.getWeatherData().getTemp());
 				session.setAttribute("wstatus", wdao.getWeatherData());
 				mv.setViewName("redirect:homeinfo"); // 유저 페이지
 			}
@@ -129,7 +128,22 @@ public class MemberController {
 		} else {
 			return "id";
 		}
-
+	}
+	
+	@RequestMapping("/temperature")
+	public String setTemperature(HttpSession session, String selecttemp) {
+		
+		System.out.println("get temp : " + selecttemp);
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		member.setSelecttemp(selecttemp);
+		if(dao.updateSelTemp(member) == 1) {
+			session.setAttribute("member", member);
+			System.out.println("suscess");
+			return "success";
+		}
+		System.out.println("fail");
+		return "fail";
 	}
 
 	// 뷰에서 바뀐 selecttemp db에 전달하기

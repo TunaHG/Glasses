@@ -47,9 +47,13 @@ public class MemberDAO {
 	}
 	
 	// 희망온도 적용하기 
-	public int getSelectTemp(HttpServletRequest requesttemp) { 
-		return session.update("getSelectTemp", requesttemp);
+	public int updateSelTemp(MemberVO vo) { 
+		return session.update("updatetemp", vo);
 	}
+//	public int getSelectTemp(HttpServletRequest requesttemp) { 
+//		return session.update("getSelectTemp", requesttemp);
+//	}
+	
 	
 //		public int idCheck(MemberVO member_id) {
 //			return session.selectOne("idcheck", member_id);
