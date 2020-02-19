@@ -104,7 +104,7 @@ public class WeatherDAO {
 			fdate.clone();
 			ftime.clone();
 			
-			System.out.println("vilage : " + vo.getVilageDate() + "/" + vo.getVilageTime());
+//			System.out.println("vilage : " + vo.getVilageDate() + "/" + vo.getVilageTime());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,7 +119,7 @@ public class WeatherDAO {
 		this.getBaseWeather(vo);
 		this.getVilageWeather(vo);
 		
-		System.out.println(vo);
+//		System.out.println(vo);
 		
 		return vo;
 		
@@ -176,7 +176,7 @@ public class WeatherDAO {
 				}
 			}
 			
-			System.out.println("초단기 : "+vo);
+//			System.out.println("초단기 : "+vo);
 			
 			br.close();
 			
@@ -218,9 +218,9 @@ public class WeatherDAO {
 			String result = sb.substring(sb.indexOf("["), sb.indexOf("]")+1);
 			
 			List<Map<String, Object>> data = mapper.readValue(result, new TypeReference<List<Map<String, Object>>>(){});
-			System.out.println("동네예보");
+//			System.out.println("동네예보");
 			for (int i = 0; i < data.size(); i++) {
-				System.out.println(data.get(i));
+//				System.out.println(data.get(i));
 				if( data.get(i).get("category").equals("SKY") ) {
 					
 //					String sky = (String) data.get(i).get("fcstValue");
@@ -237,7 +237,7 @@ public class WeatherDAO {
 				}
 			}
 			
-			System.out.println("동네 : "+vo);
+//			System.out.println("동네 : "+vo);
 			
 			br.close();
 			

@@ -24,6 +24,9 @@ public class MemberController {
 	MemberDAO dao;
 	
 	@Autowired
+	BoardDAO bdao;
+	
+	@Autowired
 	HouseStatusDAO hdao;
 	
 	@Autowired
@@ -69,9 +72,11 @@ public class MemberController {
 			if (result.house_id.equals("admin")) {
 				mv.setViewName("redirect:freeboardlist"); // 관리자 페이지
 			} else {
+				List<BoardVO> list = bdao.getAllnotice();
+				mv.addObject("list", list);
 				session.setAttribute("hstatus", hdao.getStatus(result));
 				session.setAttribute("wstatus", wdao.getWeatherData());
-				mv.setViewName("redirect:homeinfo"); // 유저 페이지
+				mv.setViewName("homeinfo"); // 유저 페이지
 			}
 //			mv.setViewName("redirect:homeinfo");
 		}
@@ -111,12 +116,12 @@ public class MemberController {
 	@RequestMapping(value = "/membercheck", method = RequestMethod.POST)
 	@ResponseBody
 	public String registerIdCheck(HttpServletRequest request, MemberVO member) {
-		System.out.println("before " + member);
+//		System.out.println("before " + member);
 
 		if (dao.isIdExist(member) == 0) {
 			if (dao.isHouseExist(member) == 0) {
 				if (dao.insertMember(member) == 1) {
-					System.out.println("after " + dao.getAccountInfo(member));
+//					System.out.println("after " + dao.getAccountInfo(member));
 					return "success";
 				} else {
 					return "error";
@@ -286,7 +291,7 @@ public class MemberController {
 	
 	@RequestMapping("/updatemember")
 	public String updateMember(@ModelAttribute MemberVO vo) {
-		System.out.println(vo);
+//		System.out.println(vo);
 		dao.updateMember(vo);
 		System.out.println(vo.allowed+"2222222222222");
 		return "redirect:/membertable?pagenum="+1;
