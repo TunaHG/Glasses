@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.multi.glasses.MemberVO" %>
+<%@page import="com.multi.glasses.MemberVO"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,11 +12,12 @@
         <meta name="author" content="" />
         <title>공지사항</title>
         <link href="resources/css/styles.css" rel="stylesheet" />
+        <link href="resources/css/hg.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-    <% MemberVO vo = (MemberVO)session.getAttribute("member"); %>
+    <% MemberVO logined = (MemberVO)session.getAttribute("member"); %>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html">Spring Project</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
                 <!-- 사람표시를 맨 오른쪽으로 보내기 위함 -->
@@ -43,7 +44,9 @@
                             <a class="nav-link" href="index.html">
                             	<div class="sb-nav-link-icon">
                             		<i class="fas fa-tachometer-alt"></i>
-                            	</div>메인화면</a>
+                            	</div>
+                                	메인화면
+                            </a>
                             <div class="sb-sidenav-menu-heading"></div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -68,7 +71,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        <%=vo.getMember_id() %>
+                        <%=logined.getMember_id() %>
                     </div>
                 </nav>
             </div>
@@ -81,51 +84,67 @@
                             <li class="breadcrumb-item active">공지사항</li>
                         </ol>
                         <div class="card mb-4">
-                            <div class="card-body">이곳은 공지사항 게시판입니다.</div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-table mr-1"></i>목록</div>
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>${vo.board_no}번 게시물</div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>번호</th>
-                                                <th>제목</th>
-                                                <th>작성자</th>
-                                                <th>조회수</th>
-                                                <th>등록일시</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>번호</th>
-                                                <th>제목</th>
-                                                <th>작성자</th>
-                                                <th>조회수</th>
-                                                <th>등록일시</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                        	<c:forEach items="${list}" var="vo">
-                                        		<tr>
-                                        			<td>${vo.board_no}</td>
-                                        			<td><a href="<%=request.getContextPath()%>/detailboard?board_no=${vo.board_no}">${vo.title}</a></td>
-                                        			<td>${vo.member_id}</td>
-                                        			<td>${vo.viewcnt}</td>
-                                        			<td>${vo.reg_date}</td>
-                                        		</tr>
-                                        	</c:forEach>
-                                        </tbody>
-                                    </table>
-                                    <%
-                                    	if(vo.getHouse_id().equals("admin")){
-                                    %>
-                                    <form action="<%=request.getContextPath()%>/boardinsert">
-                                    	<input type=hidden value="notice" name="form">
-                                    	<input type=submit value="글쓰기">
-                                    </form>
-                                    <%} %>
+                                	<table class="detailboard">
+								<tr>
+									<td class="detailboard">번호</td>
+									<td class="detailboard" colspan="2">${vo.board_no}</td>
+								</tr>
+								<tr>
+									<td class="detailboard">제목</td>
+									<td class="detailboard" colspan="2">${vo.title}</td>
+								</tr>
+								<tr>
+									<td class="detailboard">내용</td>
+									<td class="detailboard" colspan="2">${vo.contents}</td>
+								</tr>
+								<tr>
+									<td class="detailboard">작성자</td>
+									<td class="detailboard" colspan="2">${vo.member_id}</td>
+								</tr>
+								<tr>
+									<td class="detailboard">조회수</td>
+									<td class="detailboard" colspan="2">${vo.viewcnt}</td>
+								</tr>
+								<tr>
+									<td class="detailboard">등록일시</td>
+									<td class="detailboard" colspan="2">${vo.reg_date}</td>
+								</tr>
+								<tr>
+									<%
+										if(logined.getHouse_id().equals("admin")){
+										
+									%>
+									<td class="formbox">
+										<form action="<%=request.getContextPath()%>/boardupdate">
+											<input type="hidden" value="${vo.board_no}" name="board_no">
+											<input type="submit" value="수정">
+										</form>
+									</td>
+									<td class="formbox">
+										<form action="<%=request.getContextPath()%>/boarddelete">
+											<input type="hidden" value="${vo.board_no}" name="board_no">
+											<input type="submit" value="삭제">
+										</form>
+									</td>
+									<td class="formbox">
+										<form action="<%=request.getContextPath()%>/noticeboardlist">
+											<input type="submit" value="목록">
+										</form>
+									</td>
+									<%} else { %>
+									<td>
+										<form action="<%=request.getContextPath()%>/noticeboardlist">
+											<input type="submit" value="목록">
+										</form>
+									</td>
+									<td></td>
+									<td></td>
+									<%} %>
+								</tr>
+							</table>
                                 </div>
                             </div>
                         </div>

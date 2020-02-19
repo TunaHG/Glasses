@@ -43,51 +43,33 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard</a
-                            >
-                            <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layouts
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                            ></a>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/">
+                            	<div class="sb-nav-link-icon">
+                            		<i class="fas fa-tachometer-alt"></i>
+                            	</div>
+                                	메인화면
+                            </a>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                	게시판
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="layout-static.html">Static Navigation</a><a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a></nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                            ></a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth"
-                                        >Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                                    ></a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="login.html">Login</a><a class="nav-link" href="register.html">Register</a><a class="nav-link" href="password.html">Forgot Password</a></nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError"
-                                        >Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                                    ></a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav"><a class="nav-link" href="401.html">401 Page</a><a class="nav-link" href="404.html">404 Page</a><a class="nav-link" href="500.html">500 Page</a></nav>
-                                    </div>
+                                <nav class="sb-sidenav-menu-nested nav">
+                                	<a class="nav-link" href="<%=request.getContextPath()%>/noticeboardlist">공지사항</a>
+                                	<a class="nav-link" href="<%=request.getContextPath()%>/freeboardlist">자유게시판</a>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts</a
-                            ><a class="nav-link" href="tables.html"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables</a
-                            >
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a 
+                            	class="nav-link" href="<%=request.getContextPath()%>/membertable?pagenum=1">
+                            	<div class="sb-nav-link-icon">
+                            		<i class="fas fa-tachometer-alt"></i>
+                            	</div>
+                                	회원 관리
+                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -120,29 +102,29 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${approvalList }" var="vo">
-											<form action="http://localhost:8081/mvc/updateallowed">
-									<tr>
-										<td>${vo.member_id }</td>
-										<td>${vo.password }</td>
-										<td>${vo.name }</td>
-										<td>${vo.phone }</td>
-										
-										<td><select id="allowed"  name="allowed">
-												<option value="false">false</option>
-												<option value="user">user</option>
-												<option value="admin">admin</option>
-											</select></td>
-										<td>${vo.house_id}</td>
-										<td>
-												<input type="hidden" name="house_id"value="${vo.house_id }"> 
-												<input type="hidden" id="allowed" name="allowed"vlaue="${vo.allowed }">
-												<input type="submit"value="승인">
-											</form>
+									<form action="http://localhost:8081/glasses/updateallowed">
+										<tr>
+											<td>${vo.member_id }</td>
+											<td>${vo.password }</td>
+											<td>${vo.name }</td>
+											<td>${vo.phone }</td>
+											
+											<td><select id="allowed"  name="allowed">
+													<option value="FALSE">FALSE</option>
+													<option value="USER">USER</option>
+													<option value="ADMIN">ADMIN</option>
+												</select></td>
+											<td>${vo.house_id}</td>
+											<td>
+											<input type="hidden" name="house_id"value="${vo.house_id }"> 
+											<input type="hidden" id="allowed" name="allowed"vlaue="${vo.allowed }">
+											<input type="submit"value="승인">
+										</form>
 											<!-- <input type="submit" value="승인"> -->
 											<!-- <input type="button" onClick="location.href='http://localhost:8081/mvc/updatemember'" value="승인"> -->
 										</td>
 										<td>	
-											<form action="http://localhost:8081/mvc/deletemember">
+											<form action="http://localhost:8081/glasses/deletemember">
 												<input type="hidden" name="house_id"value="${vo.house_id }"> 
 												<input type="submit"value="삭제">
 											</form>
@@ -172,12 +154,19 @@
                                         <tbody>
 											<c:forEach items="${memberlist }" var="vo">  <%-- prefix="c" <c:forEach>  앞에 c로 정의해준다 ?:forEac테그를 쓰기위해서는 위에 <%@ %>를 정으해줘야함  --%>
 												<tr>
-	                                                <td>${vo.member_id }</td>
+	                                                <<%-- td>${vo.member_id }</td>
 	                                                <td>${vo.password }</td>
 	                                                <td>${vo.name }</td>
 	                                                <td>${vo.phone }</td>
 	                                                <td>${vo.allowed }</td>
-	                                                <td><a href="http://localhost:8081/mvc/memberdetail?house_id=${vo.house_id}">${vo.house_id}</a></td>
+	                                                <td><a href="http://localhost:8081/glasses/memberdetail?house_id=${vo.house_id}">${vo.house_id}</a></td> --%>
+	                                               
+	                                                <td><a href="http://localhost:8081/glasses/memberdetail?member_id=${vo.member_id}">${vo.member_id}</a></td>
+	                                                <td>${vo.password }</td>
+	                                                <td>${vo.name }</td>
+	                                                <td>${vo.phone }</td>
+	                                                <td>${vo.allowed }</td>
+	                                                <td>${vo.house_id}</td>
 	                                            		
 	                                            </tr>
 											</c:forEach>
@@ -187,7 +176,7 @@
 											// int totalPage = (int) request.getAttribute("totalPage"); /* == ${totalPage } 같은의미 */
 											/*
 											for (int i = 1; i <= totalPage; i++) {
-												out.println("<a href='/mvc/membertable?pagenum=" + i + "'>" + i + "</a>&nbsp;");
+												out.println("<a href='/glasses/membertable?pagenum=" + i + "'>" + i + "</a>&nbsp;");
 											}
 											*/
 										%>

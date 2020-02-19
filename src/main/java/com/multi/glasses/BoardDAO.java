@@ -20,4 +20,22 @@ public class BoardDAO {
 		List<BoardVO> list = session.selectList("noticeboardlist");
 		return list;
 	}
+	
+	public void createBoard(BoardVO vo) {
+		session.insert("insertboard", vo);
+	}
+	
+	public BoardVO getDetailBoard(int board_no) {
+		session.update("updateviewcnt", board_no);
+		BoardVO vo = session.selectOne("detailboard", board_no);
+		return vo;
+	}
+	
+	public void updateBoard(BoardVO vo) {
+		session.update("updateboard", vo);
+	}
+	
+	public void deleteBoard(int board_no) {
+		session.delete("deleteboard", board_no);
+	}
 }

@@ -3,54 +3,86 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-<select id="membercheck" resultType="int" parameterType="member">
-	select count(*) from member
-	where member_id = #{member_id} and password = #{password}
-</select>
+	<update id="getSelectTemp" parameterType="member">
+		update member set selecttemp = #{selecttemp} where house_id = #{house_id}
+	</update>
 
-<select id="existid" resultType="int" parameterType="member">
-	select count(*) from member where member_id=#{member_id}
-</select>
+	<update id="updatetemp" parameterType="member">
+		update member set selecttemp= #{selecttemp} where house_id=#{house_id}
+	</update>
 
-<select id="existhouse" resultType="int" parameterType="member">
-	select count(*) from member where house_id=#{house_id}
-</select>
+	<select id="membercheck" resultType="int" parameterType="member">
+		select count(*) from member
+		where member_id = #{member_id} and password = #{password}
+	</select>
+	
+	<select id="existid" resultType="int" parameterType="member">
+		select count(*) from member where member_id=#{member_id}
+	</select>
 
-<insert id="insertmember">
-	insert into member(member_id, password, name, phone, allowed, house_id, selecttemp) 
-	values(#{member_id}, #{password}, #{name}, #{phone}, 'USER', #{house_id}, '22')
-</insert>
-<!--
-member_id, password, name, phone, allowed, date, house_id
-
-<insert id="newmember" parameterType="member"> 
-	insert into member(userid, password, name, phone) 
-	values(#{userid}, #{password}, #{name}, #{phone})
-</insert>
--->
-
-<select id="getaccountinfo" resultType="member" parameterType="member">
-	select * from member where member_id=#{member_id} and password=#{password} and allowed='TRUE'
-</select>
-
-<select id="getaccountinfo2" resultType="member" parameterType="member">
-	select * from member where member_id=#{member_id} and password=#{password}  
-</select>
-
-<update id="getSelectTemp" parameterType="member">
-	update member set selecttemp = #{selecttemp} where house_id = #{house_id}
-</update>
-
-<update id="updatetemp" parameterType="member">
-	update member set selecttemp= #{selecttemp} where house_id=#{house_id}
-</update>
+	<select id="existhouse" resultType="int" parameterType="member">
+		select count(*) from member where house_id=#{house_id}
+	</select>
+	
+	<insert id="insertmember">
+		insert into member(member_id, password, name, phone, allowed, house_id) 
+		values(#{member_id}, #{password}, #{name}, #{phone}, 'false', #{house_id})
+	</insert>
+	<!--
+	member_id, password, name, phone, allowed, date, house_id
+	
+	<insert id="newmember" parameterType="member"> 
+		insert into member(userid, password, name, phone) 
+		values(#{userid}, #{password}, #{name}, #{phone})
+	</insert>
+	-->
+	
+	<select id="getaccountinfo" resultType="member" parameterType="member">
+		select * from member where member_id=#{member_id} and password=#{password} and allowed='TRUE'
+		
+	</select>
+	
+	<select id="getaccountinfo2" resultType="member" parameterType="member">
+		select * from member where member_id=#{member_id} and password=#{password}  
+	</select>
+	
+	<!-- ///////////////////////////khh///////////////////////////////// -->
+	
+	<select id="pagelist" resultType="member" parameterType="int[]">
+		select member_id,password, name, phone,allowed, house_id 
+			from (select rownum r,member_id,password, name,phone,allowed, house_id 
+				from (select * from member order by house_id desc)) where r between #{array[0]} and #{array[1]}
+	</select>
+	
+	<select id="cntmember" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<!-- <select id="detail" resultType="member" parameterType="member">
+		select * from member where house_id=#{house_id }
+	</select> -->
+	<select id="detail" resultType="member" parameterType="String">
+		select * from member where member_id=#{member_id }
+	</select>
+	
+	<update id="updatemember" parameterType="String">
+		update member set password=#{password}, name=#{name}, phone=#{phone},allowed=#{allowed} where house_id=#{house_id}
+	</update>
+	
+	<update id="updateallowed" parameterType="member">
+		update member set allowed=#{allowed} where house_id=#{house_id}
+	</update>
+	
+	<select id="allowedlist" resultType="member">
+		select * from member where allowed='FALSE' order by house_id
+	</select>
+	
+	<delete id="deletemember" parameterType="String">
+		delete from member where house_id=#{house_id}
+	</delete>
+	
+	<!-- ///////////////////////////khh///////////////////////////////// -->
 
 </mapper>
-
-
-
-
-
-
 
 
