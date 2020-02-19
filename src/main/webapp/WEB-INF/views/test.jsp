@@ -22,15 +22,20 @@ all : ${member }<br>
 id : ${member.member_id }<br>
 house : ${member.house_id }<br>
 name : ${member.name }<br>
-tmp : ${member.selecttemp }<br>
+temp : ${member.selecttemp }<br>
 
 <hr>
 
 <i class="wi wi-day-sunny"></i>
 <i class="wi wi-day-cloudy"></i>
 <i class="wi wi-day-rain"></i>
-<i class="wi wi-day-snow"></i>
+<i class="wi wi-day-snow"></i><br>
+
 <i class="wi wi-cloudy"></i>
+<i class="wi wi-rain"></i>
+<i class="wi wi-snow"></i><br>
+
+
 <i class="wi wi-night-clear"></i>
 <i class="wi wi-night-alt-cloudy"></i>
 <i class="wi wi-night-alt-rain"></i>

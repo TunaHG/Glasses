@@ -214,7 +214,7 @@
 							<h4 class="card-title font-weight-bold">역삼 2동</h4>
 							<div class="d-flex justify-content-between">
 								<p class="display-1 degree">${wstatus.temp }&deg;</p>&nbsp;
-								<div class="fa-4x pt-3" style="padding-left: 20px"><i class="wi wi-day-sunny"></i></div>
+								<div id="myicon" class="fa-4x pt-3" style="padding-left: 20px"><i class="wi wi-day-sunny"></i></div>
 <!-- 								<div class="fa-4x pt-3" style="padding-left: 20px"><i class="fas fa-snowflake"></i></div> -->
 								<!-- <i class="fas fa-sun-o fa-5x pt-3 amber-text"></i> -->
 							</div>
@@ -306,6 +306,44 @@
 	<script>
 		
 		$().ready(function() {
+			// SKY	sky			1 맑음	3 구름많음			4 흐림
+			// PRY	rainfall	0 없음	1 비		2 눈/비	3 눈
+			
+			var rainfall = '${wstatus.rainfall}'
+			var sky = '${wstatus.sky}'
+			
+			if ( sky = '1' ) {
+				if ( rainfall = '0' ) {
+					$("#myicon").html("<i class=\"wi wi-day-sunny\"></i>");
+				} else if ( rainfall = '1' ) {
+					$("#myicon").html("<i class=\"wi wi-day-rain\"></i>");
+				} else if ( rainfall = '2' ) {
+					$("#myicon").html("<i class=\"wi wi-day-rain\"></i>");
+				} else if ( rainfall = '3' ) {
+					$("#myicon").html("<i class=\"wi wi-day-snow\"></i>");
+				}
+			} else if ( sky = '3' ) {
+				if ( rainfall = '0' ) {
+					$("#myicon").html("<i class=\"wi wi-day-cloudy\"></i>");
+				} else if ( rainfall = '1' ) {
+					$("#myicon").html("<i class=\"wi wi-rain\"></i>");
+				} else if ( rainfall = '2' ) {
+					$("#myicon").html("<i class=\"wi wi-rain\"></i>");
+				} else if ( rainfall = '3' ) {
+					$("#myicon").html("<i class=\"wi wi-snow\"></i>");
+				}
+			} else if ( sky = '4' ) {
+				if ( rainfall = '0' ) {
+					$("#myicon").html("<i class=\"wi wi-day-cloudy\"></i>");
+				} else if ( rainfall = '1' ) {
+					$("#myicon").html("<i class=\"wi wi-rain\"></i>");
+				} else if ( rainfall = '2' ) {
+					$("#myicon").html("<i class=\"wi wi-rain\"></i>");
+				} else if ( rainfall = '3' ) {
+					$("#myicon").html("<i class=\"wi wi-snow\"></i>");
+				}
+			}
+			
 			$("#up").click(function(){
 				var num = $("#display").html();
 				num = num.substring(0, 2);
@@ -326,18 +364,16 @@
 					type: 'POST',
 					url: '/glasses/temperature',
 					data: data,
-					success: function () {
-						alert("설정이 변경되었습니다.");
+					success: function (data) {
+						alert(data);
+						//if(data == "success")
+							//alert("설정이 변경되었습니다.");
 					}
 				});
 			});
 			
-			
 		});
-	
-		/* 	$("#onoff").on(click, function(){
 		
-		}); */
 	</script>
 </body>
 </html>

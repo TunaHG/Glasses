@@ -2,7 +2,7 @@ package com.multi.glasses;
 
 public class WeatherVO {
 		// T1H	 PTY	 SKY
-	String temp, status, sky;
+	String temp, rainfall, sky;
 	String baseDate, baseTime;		// 초단기
 	String vilageDate, vilageTime;	// 동네예보
 
@@ -14,12 +14,12 @@ public class WeatherVO {
 		this.temp = temp;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getRainfall() {
+		return rainfall;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setRainfall(String rainfall) {
+		this.rainfall = rainfall;
 	}
 
 	public String getSky() {
@@ -64,8 +64,9 @@ public class WeatherVO {
 
 	@Override
 	public String toString() {
-		return "WeatherVO [Date/Time=" + baseDate + "/" + baseTime + 
-				", temp : " + temp + ", status : " + status + ", sky : " + sky + "]";
+		return "WeatherVO [base : " + baseDate + "/" + baseTime + 
+				", vilage : " + vilageDate + "/" + vilageTime +
+				", temp : " + temp + ", rainfall : " + rainfall + ", sky : " + sky + "]";
 	}
 	
 	

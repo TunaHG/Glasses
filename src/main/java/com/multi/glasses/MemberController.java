@@ -68,6 +68,8 @@ public class MemberController {
 			} else {
 				session.setAttribute("hstatus", hdao.getStatus(result));
 				session.setAttribute("wstatus", wdao.getWeatherData());
+//				mv.addObject("hstatus", hdao.getStatus(result));
+//				mv.addObject("wstatus", wdao.getWeatherData());
 				mv.setViewName("redirect:homeinfo"); // 유저 페이지
 			}
 //			mv.setViewName("redirect:homeinfo");
@@ -139,11 +141,12 @@ public class MemberController {
 		member.setSelecttemp(selecttemp);
 		if(dao.updateSelTemp(member) == 1) {
 			session.setAttribute("member", member);
-			System.out.println("suscess");
+			System.out.println("success");
 			return "success";
+		} else {
+			System.out.println("fail");
+			return "fail";
 		}
-		System.out.println("fail");
-		return "fail";
 	}
 
 	// 뷰에서 바뀐 selecttemp db에 전달하기
