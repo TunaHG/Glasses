@@ -27,10 +27,10 @@ public class MemberController {
 	WeatherDAO wdao;
 
 	// templetes form
-	@RequestMapping("/index")
-	public String index() {
-		return "index";
-	}
+//	@RequestMapping("/index")
+//	public String index() {
+//		return "index";
+//	}
 
 	// get, 받아오기
 	// 경로 ("/")
@@ -68,8 +68,6 @@ public class MemberController {
 			} else {
 				session.setAttribute("hstatus", hdao.getStatus(result));
 				session.setAttribute("wstatus", wdao.getWeatherData());
-//				mv.addObject("hstatus", hdao.getStatus(result));
-//				mv.addObject("wstatus", wdao.getWeatherData());
 				mv.setViewName("redirect:homeinfo"); // 유저 페이지
 			}
 //			mv.setViewName("redirect:homeinfo");
@@ -83,11 +81,6 @@ public class MemberController {
 	public String homeInfo() {
 
 		return "homeinfo";
-	}
-
-	@RequestMapping("/test")
-	public String test() {
-		return "/test";
 	}
 
 	// 로그인 실패 화면
@@ -110,7 +103,8 @@ public class MemberController {
 		return "register";
 	}
 
-//	@RequestMapping("/membercheck")		// using in register - Ajax
+	// using in register - Ajax
+//	@RequestMapping("/membercheck")		
 	@RequestMapping(value = "/membercheck", method = RequestMethod.POST)
 	@ResponseBody
 	public String registerIdCheck(HttpServletRequest request, MemberVO member) {
@@ -132,19 +126,20 @@ public class MemberController {
 		}
 	}
 	
+	// homeinfo 희망온도 저장
 	@RequestMapping("/temperature")
 	public String setTemperature(HttpSession session, String selecttemp) {
 		
-		System.out.println("get temp : " + selecttemp);
+//		System.out.println("get temp : " + selecttemp);
 		
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		member.setSelecttemp(selecttemp);
 		if(dao.updateSelTemp(member) == 1) {
 			session.setAttribute("member", member);
-			System.out.println("success");
+//			System.out.println("success");
 			return "success";
 		} else {
-			System.out.println("fail");
+//			System.out.println("fail");
 			return "fail";
 		}
 	}
@@ -239,6 +234,10 @@ public class MemberController {
 //			return "homeinfo";
 //		}
 //	
+//	}
+//	@RequestMapping("/test")
+//	public String test() {
+//		return "/test";
 //	}
 
 }

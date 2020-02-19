@@ -43,13 +43,14 @@ public class MemberDAO {
 	public MemberVO getAccountInfo(MemberVO vo) {
 		// memberVO.allowed check : getaccountinfo
 		// memberVO.allowed not check : getaccountinfo2
-		return session.selectOne("getaccountinfo2", vo);
+		return session.selectOne("getaccountinfo", vo);
 	}
 	
 	// 희망온도 적용하기 
 	public int updateSelTemp(MemberVO vo) { 
 		return session.update("updatetemp", vo);
 	}
+	
 //	public int getSelectTemp(HttpServletRequest requesttemp) { 
 //		return session.update("getSelectTemp", requesttemp);
 //	}
