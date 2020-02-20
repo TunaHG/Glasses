@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #eee;
+}
+.wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 635.156px;
+    height: 300px;
+    margin: -150px 0 0 -317.578px;
+    align-items: left;
+}
+.widget {
+    position: relative;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 228px;
+    height: 228px;
+    padding: 36px;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 0 15px #ddd;
+}
+.icon {
+    font-family: 'FontAwesome';
+    float: right;
+}
+.widget > div {
+    font-weight: 300;
+    position: absolute;
+    bottom: 36px;
+    color: #b8b8b8;
+}
+.degree {
+    font-size: 4em;
+}
+.country {
+    font-size: 2em;
+    line-height: 10px;
+    color: #cbcbcb;
+}
+.fa-sun-o {
+    animation: sunRotate 3.7s infinite linear;
+}
+.fa-bolt {
+    animation: bolt .5s infinite linear;
+}
+@keyframes sunRotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes bolt {
+    0% {
+        margin-right: 0;
+    }
+    50% {
+        margin-right: -20px;
+        color: #ffa500;
+    }
+    75% {
+        margin-right: 0;
+    }
+    100% {
+        margin-left: -20px;
+    }
+}
+/* Weather Widgets */
+
+div .temp-card-left {
+	float: left;
+    width: 79%;
+    height: 100%;
+    text-align: center;
+}
+
+div .temp-card-right {
+	float: left;
+    width: 19%;
+    height: 100%;
+}
+
+div .temp-card-up {
+    width: 100%;
+    height: 48.8%;
+    text-align: center;
+}
+
+div .temp-card-down {
+    width: 100%;
+    height: 48,8%;
+    text-align: center;
+}
