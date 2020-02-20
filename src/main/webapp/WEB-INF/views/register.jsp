@@ -184,7 +184,7 @@
 							} else if(data == "house") {
 								$("#inputHouseID").focus();
 								alert("해당 세대는 더이상 회원가입이 불가능합니다.");
-								window.location.href='<%=request.getContextPath()%>/';								
+								window.location.href='<%=request.getContextPath()%>/register';								
 							} else if(data == "id"){
 								// already exist id
 								$("#inputId").focus();

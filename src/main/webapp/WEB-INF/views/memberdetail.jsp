@@ -18,7 +18,11 @@
     <body class="sb-nav-fixed">
     <% MemberVO vo = (MemberVO)session.getAttribute("member"); %>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<a class="navbar-brand" href="index.html">Spring Project</a>
+		<%if(!vo.getHouse_id().equals("admin")){%>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/homeinfo">Glasses Village</a>
+        <%} else { %>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/membertable?pagenum=1">Glasses Village</a>
+        <%} %>
 		<button class="btn btn-link btn-sm order-1 order-lg-0"
 			id="sidebarToggle" href="#">
 			<i class="fas fa-bars"></i>
@@ -34,7 +38,7 @@
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="userDropdown">
 					<a class="dropdown-item" href="#">마이페이지</a> <a
-						class="dropdown-item" href="login.html">로그아웃</a>
+						class="dropdown-item" href="<%=request.getContextPath()%>/">로그아웃</a>
 				</div></li>
 		</ul>
 	</nav>
@@ -46,7 +50,7 @@
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading"></div>
                             <%if(!vo.getHouse_id().equals("admin")){%>
-                            <a class="nav-link" href="<%=request.getContextPath()%>/">
+                            <a class="nav-link" href="<%=request.getContextPath()%>/homeinfo">
                             	<div class="sb-nav-link-icon">
                             		<i class="fas fa-tachometer-alt"></i>
                             	</div>
@@ -93,7 +97,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 										<thead>
-											<form action="http://localhost:8081/glasses/updatemember">
+											<form action="<%=request.getContextPath() %>/updatemember">
 											
 												<tr><th>member_id:</th><th><input type="text" name="member_id"value=${detail.member_id } readonly></th></tr>
 												<tr><th>password:</th><th><input type="text" name="password"value=${detail.password }></th></tr>
@@ -107,7 +111,7 @@
 												<tr><th>house_id:</th><th><input type="text" name="house_id"value=${detail.house_id } readonly></th></tr>
 												 <input type="submit" value="수정">
 											</form>
-											<form action="http://localhost:8081/glasses/deletemember">
+											<form action="<%=request.getContextPath() %>/deletemember">
 												<input type="hidden" name="house_id"value="${detail.house_id }"> 
 												<input type="submit"value="삭제">
 											</form>
@@ -122,8 +126,7 @@
 				<div class="container-fluid">
 					<div
 						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; MultiCampus Semi
-							Spring Project 2020</div>
+						<div class="text-muted">Copyright &copy; Glasses Village 2020</div>
 						<div>
 							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
 								&amp; Conditions</a>
