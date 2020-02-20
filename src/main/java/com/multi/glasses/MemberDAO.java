@@ -98,7 +98,7 @@ public class MemberDAO {
 		session.update("updatemember", vo);
 	}
 	
-	public void updateAllowed(String allowed,String house_id) {
+	public void updateAllowed(String allowed, String house_id) {
 		MemberVO vo = new MemberVO();
 		vo.setAllowed(allowed);
 		vo.setHouse_id(house_id);

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true"%>
+<%@ page import="com.multi.glasses.MemberVO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Dashboard - SB Admin</title>
+	<title>Glasses Village</title>
 	<style type="text/css">
 		.my-button {
 			background-color: #212529;
@@ -38,9 +39,13 @@
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
-
+	<% MemberVO logined = (MemberVO)session.getAttribute("member"); %>
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<a class="navbar-brand" href="<%=request.getContextPath()%>/">Glasses Village</a>
+		<%if(!logined.getHouse_id().equals("admin")){%>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/homeinfo">Glasses Village</a>
+        <%} else { %>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/membertable?pagenum=1">Glasses Village</a>
+        <%} %>
 		<button class="btn btn-link btn-sm order-1 order-lg-0"
 			id="sidebarToggle" href="#">
 			<i class="fas fa-bars"></i>
@@ -64,7 +69,7 @@
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">마이페이지</a>
-                    <a class="dropdown-item" href="login.html">로그아웃</a>
+                    <a class="dropdown-item" href="<%=request.getContextPath()%>/">로그아웃</a>
                 </div>
             </li>
         </ul>
@@ -76,27 +81,41 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link" href="homeinfo">
-                        	<div class="sb-nav-link-icon">
-                        		<i class="fas fa-tachometer-alt"></i>
-                        	</div>메인화면</a>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            	게시판
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                            	<a class="nav-link" href="<%=request.getContextPath()%>/noticeboardlist">공지사항</a>
-                            	<a class="nav-link" href="<%=request.getContextPath()%>/freeboardlist">자유게시판</a>
-                            </nav>
+                        <%if(!logined.getHouse_id().equals("admin")){%>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/homeinfo">
+                            	<div class="sb-nav-link-icon">
+                            		<i class="fas fa-tachometer-alt"></i>
+                            	</div>
+                                	메인화면
+                            </a>
+                            <%} else { %>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/membertable?pagenum=1">
+                            	<div class="sb-nav-link-icon">
+                            		<i class="fas fa-tachometer-alt"></i>
+                            	</div>
+                                	회원 관리
+                            </a>
+                            <%} %>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                	게시판
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                	<a class="nav-link" href="<%=request.getContextPath()%>/noticeboardlist">공지사항</a>
+                                	<a class="nav-link" href="<%=request.getContextPath()%>/freeboardlist">자유게시판 </a>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            
                         </div>
                     </div>
-                </div>
-				<div class="sb-sidenav-footer">
-					<div class="small">Copyright &copy;</div>
-					Glasses Village 2020
-				</div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        ${member.member_id }
+                    </div>
 			</nav>
 		</div>
 		<div id="layoutSidenav_content">
@@ -191,7 +210,7 @@
                                		<c:forEach items="${list}" var="vo">
                                		<tr>
                     	          		<td>${vo.board_no}</td>
-                                   		<td>${vo.title}</td>
+                                   		<td><a href="<%=request.getContextPath()%>/detailboard?board_no=${vo.board_no}">${vo.title}</a></td>
                                    		<td>${vo.member_id}</td>
                                    		<td>${vo.viewcnt}</td>
                                    		<td>${vo.reg_date}</td>

@@ -18,7 +18,11 @@
     <body class="sb-nav-fixed">
     <% MemberVO vo = (MemberVO)session.getAttribute("member"); %>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<a class="navbar-brand" href="index.html">Spring Project</a>
+		<%if(!vo.getHouse_id().equals("admin")){%>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/homeinfo">Glasses Village</a>
+        <%} else { %>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/membertable?pagenum=1">Glasses Village</a>
+        <%} %>
 		<button class="btn btn-link btn-sm order-1 order-lg-0"
 			id="sidebarToggle" href="#">
 			<i class="fas fa-bars"></i>
@@ -34,7 +38,7 @@
 				<div class="dropdown-menu dropdown-menu-right"
 					aria-labelledby="userDropdown">
 					<a class="dropdown-item" href="#">마이페이지</a> <a
-						class="dropdown-item" href="login.html">로그아웃</a>
+						class="dropdown-item" href="<%=request.getContextPath()%>/">로그아웃</a>
 				</div></li>
 		</ul>
 	</nav>
@@ -46,7 +50,7 @@
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading"></div>
                             <%if(!vo.getHouse_id().equals("admin")){%>
-                            <a class="nav-link" href="<%=request.getContextPath()%>/">
+                            <a class="nav-link" href="<%=request.getContextPath()%>/homeinfo">
                             	<div class="sb-nav-link-icon">
                             		<i class="fas fa-tachometer-alt"></i>
                             	</div>
@@ -106,30 +110,30 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${approvalList }" var="vo">
-									<form action="http://localhost:8081/glasses/updateallowed">
+									<form action="<%=request.getContextPath() %>/updateallowed">
 										<tr>
 											<td>${vo.member_id }</td>
 											<td>${vo.password }</td>
 											<td>${vo.name }</td>
 											<td>${vo.phone }</td>
 											
-											<td><select id="allowed"  name="allowed">
+											<td><select id="allowed" name="allowed">
 													<option value="FALSE">FALSE</option>
 													<option value="USER">USER</option>
 													<option value="ADMIN">ADMIN</option>
 												</select></td>
 											<td>${vo.house_id}</td>
 											<td>
-											<input type="hidden" name="house_id"value="${vo.house_id }"> 
-											<input type="hidden" id="allowed" name="allowed"vlaue="${vo.allowed }">
+											<input type="hidden" name="house_id" value="${vo.house_id }"> 
+<%-- 											<input type="hidden" id="allowed" name="allowed" value="${vo.allowed }"> --%>
 											<input type="submit"value="승인">
 										</form>
 											<!-- <input type="submit" value="승인"> -->
 											<!-- <input type="button" onClick="location.href='http://localhost:8081/mvc/updatemember'" value="승인"> -->
 										</td>
 										<td>	
-											<form action="http://localhost:8081/glasses/deletemember">
-												<input type="hidden" name="house_id"value="${vo.house_id }"> 
+											<form action="<%=request.getContextPath() %>/deletemember">
+												<input type="hidden" name="house_id" value="${vo.house_id }"> 
 												<input type="submit"value="삭제">
 											</form>
 										</td>
@@ -165,7 +169,7 @@
 	                                                <td>${vo.allowed }</td>
 	                                                <td><a href="http://localhost:8081/glasses/memberdetail?house_id=${vo.house_id}">${vo.house_id}</a></td> --%>
 	                                               
-	                                                <td><a href="http://localhost:8081/glasses/memberdetail?member_id=${vo.member_id}">${vo.member_id}</a></td>
+	                                                <td><a href="<%=request.getContextPath() %>/memberdetail?member_id=${vo.member_id}">${vo.member_id}</a></td>
 	                                                <td>${vo.password }</td>
 	                                                <td>${vo.name }</td>
 	                                                <td>${vo.phone }</td>
@@ -193,8 +197,7 @@
 				<div class="container-fluid">
 					<div
 						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; MultiCampus Semi
-							Spring Project 2020</div>
+						<div class="text-muted">Copyright &copy; Glasses Village 2020</div>
 						<div>
 							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
 								&amp; Conditions</a>

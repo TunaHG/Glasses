@@ -69,7 +69,7 @@ public class MemberController {
 //			System.out.println("session member : "+member);
 //			mv.setViewName("sessiontest");
 			if (result.house_id.equals("admin")) {
-				mv.setViewName("redirect:/membertable"); // 관리자 페이지
+				mv.setViewName("redirect:/membertable?pagenum=1"); // 관리자 페이지
 			} else {
 				List<BoardVO> list = bdao.getAllnotice();
 				mv.addObject("list", list);
@@ -85,9 +85,12 @@ public class MemberController {
 
 	// userhome 화면(로그인 성공)
 	@RequestMapping("/homeinfo")
-	public String homeInfo() {
-
-		return "homeinfo";
+	public ModelAndView homeInfo() {
+		ModelAndView mv = new ModelAndView();
+		List<BoardVO> list = bdao.getAllnotice();
+		mv.addObject("list", list);
+		mv.setViewName("homeinfo");
+		return mv;
 	}
 
 	// 로그인 실패 화면
@@ -118,7 +121,7 @@ public class MemberController {
 //		System.out.println("before " + member);
 
 		if (dao.isIdExist(member) == 0) {
-			if (dao.isHouseExist(member) == 0) {
+			if (dao.isHouseExist(member) == 0 || member.house_id.equals("admin")) {
 				if (dao.insertMember(member) == 1) {
 //					System.out.println("after " + dao.getAccountInfo(member));
 					return "success";
