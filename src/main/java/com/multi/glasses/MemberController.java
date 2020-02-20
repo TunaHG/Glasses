@@ -23,98 +23,148 @@ public class MemberController {
 	@Autowired
 	MemberDAO dao;
 	
+	@Autowired
+	BoardDAO bdao;
+	
+	@Autowired
+	HouseStatusDAO hdao;
+	
+	@Autowired
+	WeatherDAO wdao;
+
 	// templetes form
-	@RequestMapping("/index")
-	public String index() {
-		return "index";
-	}
+//	@RequestMapping("/index")
+//	public String index() {
+//		return "index";
+//	}
 
 	// get, 받아오기
-	// 나중에 경로 ("/")
+	// 경로 ("/")
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String logIn() {
-		
+
 		return "/login";
 	}
 
-	// 나중에 경로 ("/")	
+	// 경로 ("/")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView loginProcess(HttpServletRequest request, MemberVO vo) {
-		
+
 		ModelAndView mv = new ModelAndView();
 		HttpSession session;
-		
+
 		// id, pw로 불러온 온전한 member
 		MemberVO result = dao.getAccountInfo(vo);
-		
+
 		if (result == null) { // 로그인 실패
 			mv.addObject("member", vo);
 			mv.setViewName("loginfail");
-			
+
 		} else { // 로그인 성공
-			session = request.getSession(true);		// 세션 생성
+			session = request.getSession(true); // 세션 생성
 			session.setAttribute("member", result); // 세션 설정(멤버 등록)
-			
+
 			// 세선에 넣은 멤버 컨트롤러에서 꺼내는 방법
 //			MemberVO member = (MemberVO)session.getAttribute("member");
 //			System.out.println("session member : "+member);
 //			mv.setViewName("sessiontest");
-			mv.setViewName("homeinfo");
+
+			if (result.house_id.equals("admin")) {
+				mv.setViewName("redirect:freeboardlist"); // 관리자 페이지
+			} else {
+				List<BoardVO> list = bdao.getAllnotice();
+				mv.addObject("list", list);
+				session.setAttribute("hstatus", hdao.getStatus(result));
+				session.setAttribute("wstatus", wdao.getWeatherData());
+				mv.setViewName("homeinfo"); // 유저 페이지
+			}
+//			mv.setViewName("redirect:homeinfo");
 		}
-		
+
 		return mv;
 	}
-	
-	// 로그인 실패 화면
-	@RequestMapping("/loginfail")
-	public String loginFail() {
-		return "loginfail";
+
+	// userhome 화면(로그인 성공)
+	@RequestMapping("/homeinfo")
+	public String homeInfo() {
+
+		return "homeinfo";
 	}
+
+	// 로그인 실패 화면
+//	@RequestMapping("/loginfail")
+//	public String loginFail() {
+//		return "loginfail";
+//	}
 
 	// 로그아웃
 	@RequestMapping("/logout")
 	public String logOut(HttpSession session) {
-		
 		session.invalidate();
-		
-//		return "/sessiontest";
+
 		return "/login";
 	}
-	
+
 	// 회원가입 페이지 이동
 	@RequestMapping("/register")
 	public String register() {
 		return "register";
 	}
-	
-//	@RequestMapping("/membercheck")		// using in register - Ajax
-	@RequestMapping(value="/membercheck", method=RequestMethod.POST)
+
+	// using in register - Ajax
+//	@RequestMapping("/membercheck")		
+	@RequestMapping(value = "/membercheck", method = RequestMethod.POST)
 	@ResponseBody
 	public String registerIdCheck(HttpServletRequest request, MemberVO member) {
-		System.out.println("before " +member);
-		
-		if(dao.isIdExist(member) == 0) {
-			if(dao.isHouseExist(member) == 0) {	
-				if(dao.insertMember(member) == 1) {
-					System.out.println("after "+ dao.getAccountInfo(member));
+//		System.out.println("before " + member);
+
+		if (dao.isIdExist(member) == 0) {
+			if (dao.isHouseExist(member) == 0) {
+				if (dao.insertMember(member) == 1) {
+//					System.out.println("after " + dao.getAccountInfo(member));
 					return "success";
-				} else { return "error"; }
+				} else {
+					return "error";
+				}
 			} else {
 				return "house";
 			}
 		} else {
 			return "id";
 		}
-
 	}
 	
-	// userhome 화면(로그인 성공)
-	@RequestMapping("/homeinfo")
-	public String homeInfo() {
+	// homeinfo 희망온도 저장
+	@RequestMapping("/temperature")
+	public String setTemperature(HttpSession session, String selecttemp) {
 		
-		return "homeinfo";
+//		System.out.println("get temp : " + selecttemp);
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		member.setSelecttemp(selecttemp);
+		if(dao.updateSelTemp(member) == 1) {
+			session.setAttribute("member", member);
+//			System.out.println("success");
+			return "success";
+		} else {
+//			System.out.println("fail");
+			return "fail";
+		}
 	}
-	
+
+	// 뷰에서 바뀐 selecttemp db에 전달하기
+//	@RequestMapping("/buttontest")
+//	public String btntest(HttpServletRequest requesttemp, MemberVO vo) {
+//			
+//		HttpSession session;
+//		session = requesttemp.getSession(true);
+//		int btntest = dao.getSelectTemp(requesttemp);
+//
+//		if(btntest==1) {
+//		session.setAttribute("getSelectTemp", session);
+//		}
+//		return "buttontest";
+//	}
 
 // 	=============================================================================================
 //	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -193,6 +243,12 @@ public class MemberController {
 //		}
 //	
 //	}
+
+//	@RequestMapping("/test")
+//	public String test() {
+//		return "/test";
+//	}
+
 	
 	/////////////////////////////khh.//////////////////////////////
 	
@@ -235,7 +291,7 @@ public class MemberController {
 	
 	@RequestMapping("/updatemember")
 	public String updateMember(@ModelAttribute MemberVO vo) {
-		System.out.println(vo);
+//		System.out.println(vo);
 		dao.updateMember(vo);
 		System.out.println(vo.allowed+"2222222222222");
 		return "redirect:/membertable?pagenum="+1;
@@ -256,4 +312,5 @@ public class MemberController {
 		return "redirect:/membertable?pagenum="+1;
 	}
 //////////////////////////////////////////////////////////////////////////khh///
+
 }
