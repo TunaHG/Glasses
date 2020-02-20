@@ -59,7 +59,11 @@ public class MemberController {
 //			MemberVO member = (MemberVO)session.getAttribute("member");
 //			System.out.println("session member : "+member);
 //			mv.setViewName("sessiontest");
-			mv.setViewName("homeinfo");
+			if(result.getHouse_id().equals("admin")) {
+				mv.setViewName("redirect:/membertable");
+			} else {
+				mv.setViewName("homeinfo");
+			}
 		}
 		
 		return mv;
