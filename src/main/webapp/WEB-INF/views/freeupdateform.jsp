@@ -51,38 +51,35 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading"></div>
-						<a class="nav-link" href="<%=request.getContextPath()%>/">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 메인화면
-						</a>
-						<div class="sb-sidenav-menu-heading"></div>
-						<a class="nav-link collapsed" href="#" data-toggle="collapse"
-							data-target="#collapseLayouts" aria-expanded="false"
-							aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-columns"></i>
-							</div> 게시판
-							<div class="sb-sidenav-collapse-arrow">
-								<i class="fas fa-angle-down"></i>
-							</div>
-						</a>
-						<div class="collapse" id="collapseLayouts"
-							aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link"
-									href="<%=request.getContextPath()%>/noticeboardlist">공지사항</a> <a
-									class="nav-link"
-									href="<%=request.getContextPath()%>/freeboardlist">자유게시판</a>
-							</nav>
-						</div>
-						<div class="sb-sidenav-menu-heading"></div>
-						<a class="nav-link"
-							href="<%=request.getContextPath()%>/membertable?pagenum=1">
-							<div class="sb-nav-link-icon">
-								<i class="fas fa-tachometer-alt"></i>
-							</div> 회원 관리
-						</a>
+                            <%if(!vo.getHouse_id().equals("admin")){%>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/">
+                            	<div class="sb-nav-link-icon">
+                            		<i class="fas fa-tachometer-alt"></i>
+                            	</div>
+                                	메인화면
+                            </a>
+                            <%} else { %>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/membertable?pagenum=1">
+                            	<div class="sb-nav-link-icon">
+                            		<i class="fas fa-tachometer-alt"></i>
+                            	</div>
+                                	회원 관리
+                            </a>
+                            <%} %>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                	게시판
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                	<a class="nav-link" href="<%=request.getContextPath()%>/noticeboardlist">공지사항</a>
+                                	<a class="nav-link" href="<%=request.getContextPath()%>/freeboardlist">자유게시판</a>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            
 					</div>
 				</div>
 				<div class="sb-sidenav-footer">

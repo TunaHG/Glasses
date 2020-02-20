@@ -68,9 +68,8 @@ public class MemberController {
 //			MemberVO member = (MemberVO)session.getAttribute("member");
 //			System.out.println("session member : "+member);
 //			mv.setViewName("sessiontest");
-
 			if (result.house_id.equals("admin")) {
-				mv.setViewName("redirect:freeboardlist"); // 관리자 페이지
+				mv.setViewName("redirect:/membertable"); // 관리자 페이지
 			} else {
 				List<BoardVO> list = bdao.getAllnotice();
 				mv.addObject("list", list);
