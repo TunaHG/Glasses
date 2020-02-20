@@ -26,7 +26,7 @@
 	
 	<insert id="insertmember">
 		insert into member(member_id, password, name, phone, allowed, house_id) 
-		values(#{member_id}, #{password}, #{name}, #{phone}, 'false', #{house_id})
+		values(#{member_id}, #{password}, #{name}, #{phone}, 'FALSE', #{house_id})
 	</insert>
 	<!--
 	member_id, password, name, phone, allowed, date, house_id
