@@ -125,6 +125,27 @@ public class WeatherDAO {
 		
 	}
 	
+	public WeatherVO setBaseTime(WeatherVO vo) {
+		// BaseTime - 30min
+		SimpleDateFormat fdate = new SimpleDateFormat( "yyyyMMdd" );
+		SimpleDateFormat ftime = new SimpleDateFormat( "HHmm" );
+
+		String voDate = vo.getBaseDate() + vo.getBaseTime() + "00";
+		
+		Date now = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(now);
+		cal.set(Calendar.HOUR, Integer.parseInt(voDate.substring(8, 10)));
+		cal.set(Calendar.MINUTE, Integer.parseInt(voDate.substring(10, 12)));
+		// 30분 전 다시 불러오기
+		cal.add(Calendar.MINUTE, -30);
+		
+		vo.setBaseDate(fdate.format(cal.getTime()));
+		vo.setBaseTime(ftime.format(cal.getTime()));
+		
+		return vo;
+	}
+	
 	// 초단기실황 날씨 조회
 	public WeatherVO getBaseWeather(WeatherVO vo) {
 		
@@ -150,6 +171,27 @@ public class WeatherDAO {
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
 			StringBuilder sb = new StringBuilder();
 			sb.append(br.readLine());
+			
+			System.out.println(vo);
+			System.out.println(sb);
+			
+			// 서버 요청 에러  - 30분 전 날씨정보 요청
+			if(sb.toString().equals("{\"response\":{\"header\":{\"resultCode\":\"01\",\"resultMsg\":\"APPLICATION_ERROR\"}}}") == true) {
+				
+				this.setBaseTime(vo);
+				System.out.println(vo);
+				
+				url_date = "&base_date=" + vo.getBaseDate();
+				url_time = "&base_time=" + vo.getBaseTime();
+				
+				url = new URL(preUrl + key + url_date + url_time + subUrl);
+				conn = (HttpURLConnection)url.openConnection();
+				br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
+				sb = new StringBuilder();
+				sb.append(br.readLine());
+				System.out.println(sb);
+				
+			}
 			
 			String result = sb.substring(sb.indexOf("["), sb.indexOf("]")+1);
 			
