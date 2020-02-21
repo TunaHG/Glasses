@@ -66,11 +66,11 @@
 	</select>
 	
 	<update id="updatemember" parameterType="String">
-		update member set password=#{password}, name=#{name}, phone=#{phone},allowed=#{allowed} where house_id=#{house_id}
+		update member set password=#{password}, name=#{name}, phone=#{phone},allowed=#{allowed} where member_id=#{member_id}
 	</update>
 	
 	<update id="updateallowed" parameterType="member">
-		update member set allowed=#{allowed} where house_id=#{house_id}
+		update member set allowed=#{allowed} where member_id=#{member_id}
 	</update>
 	
 	<select id="allowedlist" resultType="member">
@@ -78,7 +78,7 @@
 	</select>
 	
 	<delete id="deletemember" parameterType="String">
-		delete from member where house_id=#{house_id}
+		delete from member where member_id=#{member_id}
 	</delete>
 	
 	<!-- ///////////////////////////khh///////////////////////////////// -->
