@@ -112,7 +112,7 @@
 												 <input type="submit" value="수정">
 											</form>
 											<form action="<%=request.getContextPath() %>/deletemember">
-												<input type="hidden" name="house_id"value="${detail.house_id }"> 
+												<input type="hidden" name="member_id"value="${detail.member_id }"> 
 												<input type="submit"value="삭제">
 											</form>
 										</thead>

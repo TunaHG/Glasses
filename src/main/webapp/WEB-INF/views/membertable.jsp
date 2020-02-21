@@ -124,7 +124,7 @@
 												</select></td>
 											<td>${vo.house_id}</td>
 											<td>
-											<input type="hidden" name="house_id" value="${vo.house_id }"> 
+											<input type="hidden" name="member_id" value="${vo.member_id }"> 
 <%-- 											<input type="hidden" id="allowed" name="allowed" value="${vo.allowed }"> --%>
 											<input type="submit"value="승인">
 										</form>
@@ -133,7 +133,7 @@
 										</td>
 										<td>	
 											<form action="<%=request.getContextPath() %>/deletemember">
-												<input type="hidden" name="house_id" value="${vo.house_id }"> 
+												<input type="hidden" name="member_id" value="${vo.member_id }"> 
 												<input type="submit"value="삭제">
 											</form>
 										</td>

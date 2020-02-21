@@ -300,17 +300,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/updateallowed")
-	public String updateAllowed(String allowed, String house_id) {
+	public String updateAllowed(String allowed, String member_id) {
 		System.out.println("승인 key"+allowed);
-		System.out.println("houseID =" +house_id);
-		dao.updateAllowed(allowed, house_id);
+		System.out.println("houseID =" +member_id);
+		dao.updateAllowed(allowed, member_id);
 		return "redirect:/membertable?pagenum="+1;
 	}
 	
 	@RequestMapping("/deletemember")
-	public String deleteMember(String house_id) {
-		dao.deleteMember(house_id);
-		System.out.println(house_id+"2222222222222");
+	public String deleteMember(String member_id) {
+		dao.deleteMember(member_id);
+		System.out.println(member_id+"2222222222222");
 		return "redirect:/membertable?pagenum="+1;
 	}
 //////////////////////////////////////////////////////////////////////////khh///
