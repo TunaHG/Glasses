@@ -119,7 +119,7 @@ public class WeatherDAO {
 		this.getBaseWeather(vo);
 		this.getVilageWeather(vo);
 		
-//		System.out.println(vo);
+		System.out.println(vo);
 		
 		return vo;
 		

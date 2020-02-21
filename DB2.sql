@@ -16,11 +16,11 @@ create table member(
     SELECTTEMP varchar2(10)
 );
 
-insert into member values('asdf0185', 'asdf0185', '김하균', '010-9611-7555', 'TRUE', 'admin', '22');
+insert into member values('asdf0185', 'asdf0185', '김하균', '010-9611-7555', 'TRUE', 'admin', '20');
 insert into member values('Jzee', 'Jzee', '심재영', '010-1234-5678', 'TRUE', 'admin', '22');
-insert into member values('hyunho058', 'hyunho058', '김현호', '010-3333-4444', 'TRUE', '101', '22');
-insert into member values('csy7489', 'csy7489', '최시영', '010-5555-6666', 'FALSE', '102', '22');
-insert into member values('a', 'a', 'tester', '010-5555-6666', 'TRUE', '504', '20');
+insert into member values('hyunho058', 'hyunho058', '김현호', '010-3333-4444', 'TRUE', '101', '19');
+insert into member values('csy7489', 'csy7489', '최시영', '010-5555-6666', 'FALSE', '102', '21');
+insert into member values('admin', 'admin', 'tester', '010-5555-6666', 'TRUE', 'admin', '20');
 
 drop sequence board_seq;
 create sequence board_seq;

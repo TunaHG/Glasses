@@ -246,6 +246,9 @@
 			var rainfall = '${wstatus.rainfall}'
 			var sky = '${wstatus.sky}'
 			
+			//alert(sky);
+			//alert(rainfall);
+			
 			if ( sky = '1' ) {
 				if ( rainfall = '0' ) {
 					$("#myicon").html("<i class=\"wi wi-day-sunny\"></i>");
@@ -256,7 +259,8 @@
 				} else if ( rainfall = '3' ) {
 					$("#myicon").html("<i class=\"wi wi-day-snow\"></i>");
 				}
-			} else if ( sky = '3' ) {
+			}
+			if ( sky = '3' ) {
 				if ( rainfall = '0' ) {
 					$("#myicon").html("<i class=\"wi wi-day-cloudy\"></i>");
 				} else if ( rainfall = '1' ) {
@@ -266,9 +270,10 @@
 				} else if ( rainfall = '3' ) {
 					$("#myicon").html("<i class=\"wi wi-snow\"></i>");
 				}
-			} else if ( sky = '4' ) {
+			}
+			if ( sky = '4' ) {
 				if ( rainfall = '0' ) {
-					$("#myicon").html("<i class=\"wi wi-day-cloudy\"></i>");
+					$("#myicon").html("<i class=\"wi wi-cloudy\"></i>");
 				} else if ( rainfall = '1' ) {
 					$("#myicon").html("<i class=\"wi wi-rain\"></i>");
 				} else if ( rainfall = '2' ) {
